@@ -1,0 +1,34 @@
+<div id="container">
+  <h3>EWS Calender Hours Calculator</h3>
+  <div id="app" style="display: block;">
+    <select id="calendarList" class="form-control" ng-model="calendar" ng-change="update()">
+        <option value="" selected="selected" id="pleaseSelect">Please select calendar</option>
+        <option ng-repeat="calendar in calendars" value="{{calendar.id}}">{{calendar.name}}</option>
+    </select>
+    <select id="rangeList" class="form-control" ng-model="range" ng-change="update()">
+      <option value="day">Day</option>
+      <option value="week">Week</option>
+      <option value="month">Month</option>
+      <option value="year">Year</option>
+      <option value="custom">Custom</option>
+    </select>
+    <div class="text-center">
+      <div id="controls" class="btn-group">
+        <label class="btn btn-primary" ng-click="previous()" ng-disabled="controls">PREV</label>
+        <label class="btn btn-primary" ng-click="update()" ng-disabled="controls">RESET to this week</label>
+        <label class="btn btn-primary" ng-click="next()" ng-disabled="controls">NEXT</label>
+      </div>
+    </div>
+    <div class="hours">{{cumulatedDuration}}h</div>
+    <div class="hoursrange">{{start}} - {{end}}</div>
+    <uib-accordion>
+      <uib-accordion-group heading="show/hide details" id='details'>
+        <ul class='list-unstyled'>
+          <li ng-repeat="event in events">
+            <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
+          </li>
+        </ul>
+      </uib-accordion-group>
+    </uib-accordion>
+  </div>
+</div>
