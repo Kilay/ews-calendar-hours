@@ -15,12 +15,11 @@ angular.module('ewsCalendarHourApp')
       Calendar.range = angular.copy($scope.range);
       
       Calendar.updateRange();
-      $scope.start = angular.copy(Calendar.start.format("L"));
-      $scope.end = angular.copy(Calendar.end.format("L"));
-      
       if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
         Calendar.getEvents().success(function() {
           $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
+          $scope.start = angular.copy(Calendar.start.format("L"));
+          $scope.end = angular.copy(Calendar.end.format("L"));
           $scope.controls = 0;
         });
       }
@@ -37,12 +36,11 @@ angular.module('ewsCalendarHourApp')
       Calendar.range = angular.copy($scope.range);
       
       Calendar.updateRange(-1);
-      $scope.start = angular.copy(Calendar.start.format("L"));
-      $scope.end = angular.copy(Calendar.end.format("L"));
-      
       if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
         Calendar.getEvents().success(function() {
           $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
+          $scope.start = angular.copy(Calendar.start.format("L"));
+          $scope.end = angular.copy(Calendar.end.format("L"));
           $scope.controls = 0;
         });
       }
@@ -59,12 +57,11 @@ angular.module('ewsCalendarHourApp')
       Calendar.range = angular.copy($scope.range);
       
       Calendar.updateRange(1);
-      $scope.start = angular.copy(Calendar.start.format("L"));
-      $scope.end = angular.copy(Calendar.end.format("L"));
-      
       if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
         Calendar.getEvents().success(function() {
           $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
+          $scope.start = angular.copy(Calendar.start.format("L"));
+          $scope.end = angular.copy(Calendar.end.format("L"));
           $scope.controls = 0;
         });
       }
