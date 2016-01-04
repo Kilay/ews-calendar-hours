@@ -63,6 +63,9 @@ angular.module('ewsCalendarHourApp')
         data.end = currentDatePointer.clone().add(1, data.range).subtract(1, "seconds");
         data.readableDate = data.end.format("YYYY");
       }
+      else if(data.range === "custom") {
+        data.readableDate = '';
+      }
     }
 
     data.reset = function() {

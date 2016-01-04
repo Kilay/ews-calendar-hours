@@ -19,7 +19,7 @@
         <label class="btn btn-primary" ng-click="next()" ng-disabled="controls">NEXT</label>
       </div>
       <div id="rangepicker" class="input-group" ng-hide="range!=='custom'">
-        <input date-range-picker ng-model="datesRange" type="text" class="form-control">
+        <input date-range-picker ng-model="datesRange" options="{showDropdowns: true, linkedCalendars: false}" type="text" class="form-control">
         <div class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></div>
       </div>
     </div>
