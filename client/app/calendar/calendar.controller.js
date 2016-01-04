@@ -9,6 +9,7 @@ angular.module('ewsCalendarHourApp')
     $scope.controls = 1;
     $scope.start = moment().startOf("isoWeek").format("L");
     $scope.end = moment().startOf("isoWeek").add(1, "week").subtract(1, "seconds").format("L");
+    $scope.datesRange = {startDate: null, endDate: null};
 
     $scope.update = function() {
       Calendar.calendar = angular.copy($scope.calendar);
@@ -69,4 +70,10 @@ angular.module('ewsCalendarHourApp')
         $scope.controls = 1;
       }
     };
+
+    $scope.$watch('datesRange', function(newDate) {
+      Calendar.start = newDate.startDate;
+      Calendar.end = newDate.endDate;
+      $scope.update();
+    }, false);
   });

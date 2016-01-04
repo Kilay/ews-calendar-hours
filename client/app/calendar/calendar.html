@@ -13,10 +13,14 @@
       <option value="custom">Custom</option>
     </select>
     <div class="text-center">
-      <div id="controls" class="btn-group">
+      <div id="controls" class="btn-group" ng-hide="range==='custom'">
         <label class="btn btn-primary" ng-click="previous()" ng-disabled="controls">PREV</label>
         <label class="btn btn-primary" ng-click="update()" ng-disabled="controls">RESET to this {{range}}</label>
         <label class="btn btn-primary" ng-click="next()" ng-disabled="controls">NEXT</label>
+      </div>
+      <div id="rangepicker" class="input-group" ng-hide="range!=='custom'">
+        <input date-range-picker ng-model="datesRange" type="text" class="form-control">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></div>
       </div>
     </div>
     <div class="hours" block-ui="myBlock">{{cumulatedDuration}}h</div>
