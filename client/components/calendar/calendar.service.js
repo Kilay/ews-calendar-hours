@@ -23,7 +23,7 @@ angular.module('ewsCalendarHourApp')
       return $http.post('/api/calendar/events/', {'CalendarId': data.calendar, 'StartDate': data.start.format(), 'EndDate': data.end.format()}).success(function(events) {
         var basedDuration = moment.duration();
         angular.forEach(events, function(event, key) {
-          event.durationAsHours = moment.duration(event.duration).asHours();
+          event.durationAsHours = Math.round(moment.duration(event.duration).asHours() * 100) / 100;
           basedDuration.add(moment.duration(event.duration));
         });
         angular.copy(events, data.events);
