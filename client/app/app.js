@@ -1,9 +1,6 @@
 'use strict';
 
 angular.module('ewsCalendarHourApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
   'ui.router',
   'ui.bootstrap',
   'angularMoment',
