@@ -9,7 +9,6 @@ angular.module('ewsCalendarHourApp')
         controller: 'CalendarCtrl',
         resolve: {
           events: function(Calendar) {
-            console.log()
             return Calendar.getCalendars();
           }
         }
