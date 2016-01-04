@@ -27,7 +27,7 @@ angular.module('ewsCalendarHourApp')
           basedDuration.add(moment.duration(event.duration));
         });
         angular.copy(events, data.events);
-        data.cumulatedDuration = angular.copy(basedDuration.asHours());
+        data.cumulatedDuration = angular.copy(Math.round(basedDuration.asHours() * 100) / 100);
       });
     };
 
