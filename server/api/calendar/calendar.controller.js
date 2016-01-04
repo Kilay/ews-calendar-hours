@@ -1,8 +1,6 @@
 'use strict';
 
-var _ = require('lodash');
 var exchanger = require('exchanger');
-var querystring = require('querystring');
 var config = require('../../config/local.env');
 
 // Get list of calendars

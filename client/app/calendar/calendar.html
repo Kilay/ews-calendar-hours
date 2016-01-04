@@ -1,11 +1,11 @@
 <div id="container">
   <h3>EWS Calendar Hours Calculator</h3>
   <div id="app" style="display: block;">
-    <select id="calendarList" class="form-control" ng-model="calendar" ng-change="update()">
+    <select id="calendarList" title="Calendar list" class="form-control" ng-model="calendar" ng-change="update()">
         <option value="" selected="selected" id="pleaseSelect">Please select calendar</option>
         <option ng-repeat="calendar in calendars" value="{{calendar.id}}">{{calendar.name}}</option>
     </select>
-    <select id="rangeList" class="form-control" ng-model="range" ng-change="update()">
+    <select id="rangeList" title="Range list" class="form-control" ng-model="range" ng-change="update()">
       <option value="day">Day</option>
       <option value="week">Week</option>
       <option value="month">Month</option>
@@ -19,7 +19,7 @@
         <label class="btn btn-primary" ng-click="next()" ng-disabled="controls">NEXT</label>
       </div>
       <div id="rangepicker" class="input-group" ng-hide="range!=='custom'">
-        <input date-range-picker ng-model="datesRange" options="{showDropdowns: true, linkedCalendars: false}" type="text" class="form-control">
+        <input date-range-picker ng-model="datesRange" options="{showDropdowns: true, linkedCalendars: false}" type="text" class="form-control" title="Custom range picker">
         <div class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></div>
       </div>
     </div>

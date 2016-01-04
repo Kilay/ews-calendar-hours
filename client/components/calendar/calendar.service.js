@@ -32,7 +32,7 @@ angular.module('ewsCalendarHourApp')
     };
 
     data.updateRange = function(offset) {
-      var currentDatePointer, d1, d2;
+      var currentDatePointer;
       if(offset === undefined) {
         if(data.range === "week")
           currentDatePointer = moment().startOf("isoWeek");
@@ -66,13 +66,13 @@ angular.module('ewsCalendarHourApp')
       else if(data.range === "custom") {
         data.readableDate = '';
       }
-    }
+    };
 
     data.reset = function() {
       data.cumulatedDuration = 0;
       data.calendar = '';
       data.events = [];
-    }
+    };
 
     return data;
   });

@@ -3,12 +3,8 @@
 angular.module('ewsCalendarHourApp')
   .controller('CalendarCtrl', function ($scope, Calendar) {
     $scope.calendars = Calendar.calendars;
-    $scope.events = Calendar.events;
-    $scope.cumulatedDuration = Calendar.cumulatedDuration;
     $scope.range = Calendar.range;
     $scope.controls = 1;
-    $scope.start = moment().startOf("isoWeek").format("L");
-    $scope.end = moment().startOf("isoWeek").add(1, "week").subtract(1, "seconds").format("L");
     $scope.datesRange = {startDate: null, endDate: null};
 
     $scope.update = function() {
