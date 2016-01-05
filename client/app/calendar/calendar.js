@@ -8,15 +8,11 @@ angular.module('ewsCalendarHourApp')
         templateUrl: 'app/calendar/calendar.html',
         controller: 'CalendarCtrl',
         resolve: {
-          events: function(Calendar, angularLoad, $window) {
+          events: function(Calendar, $ocLazyLoad, $window) {
             var lang = $window.navigator.language || $window.navigator.userLanguage;
-
-            angularLoad.loadScript('../../bower_components/moment/locale/' + lang + '.js').then(function() {
-              moment.locale(lang);
-            }).catch(function() {
-              angularLoad.loadScript('../../bower_components/moment/locale/' + lang.split('-')[0] + '.js').then(function() {
-                moment.locale(lang);
-              });
+            $ocLazyLoad.load('../../bower_components/moment/locale/' + lang.toLowerCase() + '.js')
+              .catch(function (err) {
+                $ocLazyLoad.load('../../bower_components/moment/locale/' + lang.split('-')[0].toLowerCase() + '.js');
             });
             return Calendar.getCalendars();
           }

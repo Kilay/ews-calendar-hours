@@ -3,10 +3,9 @@
 angular.module('ewsCalendarHourApp', [
   'ui.router',
   'ui.bootstrap',
-  'angularMoment',
   'blockUI',
   'daterangepicker',
-  'angularLoad'
+  'oc.lazyLoad'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
