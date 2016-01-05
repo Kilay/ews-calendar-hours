@@ -6,6 +6,7 @@ angular.module('ewsCalendarHourApp')
       calendar: '',
       calendars: [],
       events: [],
+      groupedEvents: {},
       cumulatedDuration: 0,
       range: 'week',
       start: '',
@@ -22,11 +23,21 @@ angular.module('ewsCalendarHourApp')
     data.getEvents = function() {
       return $http.post('/api/calendar/events/', {'CalendarId': data.calendar, 'StartDate': data.start.format(), 'EndDate': data.end.format()}).success(function(events) {
         var basedDuration = moment.duration();
+        var a = {};
         angular.forEach(events, function(event, key) {
           event.durationAsHours = Math.round(moment.duration(event.duration).asHours() * 100) / 100;
+          if(event.subject in a) {
+            a[event.subject].duration = a[event.subject].duration.add(moment.duration(event.duration));
+            a[event.subject].events.push(event);
+          }
+          else {
+            a[event.subject] = {'duration': moment.duration(event.duration), events: [event]};
+          }
+          a[event.subject].durationAsHours = Math.round(moment.duration(a[event.subject].duration).asHours() * 100) / 100;
           basedDuration.add(moment.duration(event.duration));
         });
         angular.copy(events, data.events);
+        angular.copy(a, data.groupedEvents);
         data.cumulatedDuration = angular.copy(Math.round(basedDuration.asHours() * 100) / 100);
       });
     };

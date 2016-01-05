@@ -28,10 +28,19 @@
       <div class="hoursrange">{{readableDate}}</div>
       <uib-accordion>
         <uib-accordion-group heading="show/hide details" id='details'>
+          <label>
+            <input type="checkbox" ng-model="group"> Group by name
+          </label>
           <ul class='list-unstyled'>
-            <li ng-repeat="event in events">
+            <li ng-repeat="event in events" ng-hide="group">
               <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
             </li>
+            <span ng-repeat="(key, value) in groupedEvents | orderBy: 'durationAsHours'" ng-show="group">
+              <span class="label label-primary">{{key}}</span> {{value.durationAsHours}}h
+              <li ng-repeat="event in value.events" ng-show="group" class="indent">
+                <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
+              </li>
+            </span>
           </ul>
         </uib-accordion-group>
       </uib-accordion>

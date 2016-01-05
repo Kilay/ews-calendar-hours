@@ -4,66 +4,70 @@ angular.module('ewsCalendarHourApp')
   .controller('CalendarCtrl', function ($scope, Calendar) {
     $scope.calendars = Calendar.calendars;
     $scope.range = Calendar.range;
-    $scope.controls = 1;
+    $scope.controls = true;
+    $scope.group = false;
     $scope.datesRange = {startDate: null, endDate: null};
 
     $scope.update = function() {
-      Calendar.calendar = angular.copy($scope.calendar);
-      Calendar.range = angular.copy($scope.range);
+      Calendar.calendar = $scope.calendar;
+      Calendar.range = $scope.range;
 
       Calendar.updateRange();
       if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
         Calendar.getEvents().success(function() {
-          $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
-          $scope.readableDate = angular.copy(Calendar.readableDate);
-          $scope.controls = 0;
+          $scope.cumulatedDuration = Calendar.cumulatedDuration;
+          $scope.readableDate = Calendar.readableDate;
+          $scope.controls = false;
         });
       }
       else {
         Calendar.reset();
-        $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
+        $scope.cumulatedDuration = Calendar.cumulatedDuration;
         $scope.events = Calendar.events;
-        $scope.controls = 1;
+        $scope.groupedEvents = Calendar.groupedEvents;
+        $scope.controls = true;
       }
     };
 
     $scope.previous = function() {
-      Calendar.calendar = angular.copy($scope.calendar);
-      Calendar.range = angular.copy($scope.range);
+      Calendar.calendar = $scope.calendar;
+      Calendar.range = $scope.range;
 
       Calendar.updateRange(-1);
       if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
         Calendar.getEvents().success(function() {
-          $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
-          $scope.readableDate = angular.copy(Calendar.readableDate);
-          $scope.controls = 0;
+          $scope.cumulatedDuration = Calendar.cumulatedDuration;
+          $scope.readableDate = Calendar.readableDate;
+          $scope.controls = false;
         });
       }
       else {
         Calendar.reset();
-        $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
+        $scope.cumulatedDuration = Calendar.cumulatedDuration;
         $scope.events = Calendar.events;
-        $scope.controls = 1;
+        $scope.groupedEvents = Calendar.groupedEvents;
+        $scope.controls = true;
       }
     };
 
     $scope.next = function() {
-      Calendar.calendar = angular.copy($scope.calendar);
-      Calendar.range = angular.copy($scope.range);
+      Calendar.calendar = $scope.calendar;
+      Calendar.range = $scope.range;
 
       Calendar.updateRange(1);
       if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
         Calendar.getEvents().success(function() {
-          $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
-          $scope.readableDate = angular.copy(Calendar.readableDate);
-          $scope.controls = 0;
+          $scope.cumulatedDuration = Calendar.cumulatedDuration;
+          $scope.readableDate = Calendar.readableDate;
+          $scope.controls = false;
         });
       }
       else {
         Calendar.reset();
-        $scope.cumulatedDuration = angular.copy(Calendar.cumulatedDuration);
+        $scope.cumulatedDuration = Calendar.cumulatedDuration;
         $scope.events = Calendar.events;
-        $scope.controls = 1;
+        $scope.groupedEvents = Calendar.groupedEvents;
+        $scope.controls = true;
       }
     };
 
