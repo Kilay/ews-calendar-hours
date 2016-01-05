@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ewsCalendarHourApp')
-  .factory('Calendar', function ($http, moment) {
+  .factory('Calendar', function ($http, moment, angularLoad) {
     var data = {
       calendar: '',
       calendars: [],

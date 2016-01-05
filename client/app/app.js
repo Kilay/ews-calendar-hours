@@ -5,11 +5,11 @@ angular.module('ewsCalendarHourApp', [
   'ui.bootstrap',
   'angularMoment',
   'blockUI',
-  'daterangepicker'
+  'daterangepicker',
+  'angularLoad'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
-
     $locationProvider.html5Mode(true);
   })
   .config(function(blockUIConfig) {
