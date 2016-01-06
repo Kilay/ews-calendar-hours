@@ -10,7 +10,6 @@ exports.index = function(req, res) {
 
 // Get list of calendars
 exports.calendars = function(req, res) {
-  console.log(config.DOMAIN);
   exchanger.initialize({url: config.ews.server, username: config.ews.user, password: config.ews.password}, function(err) {
     exchanger.getCalendars(function(err, calendars) {
       res.json(calendars);

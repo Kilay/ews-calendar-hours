@@ -3,7 +3,7 @@
   <div id="app" style="display: block;">
     <form role="form" method="post" class="form-horizontal" id="reg_form"> <!-- Reg form -->
       <select id="calendarList" title="Calendar list" class="form-control" ng-model="calendar" ng-change="update()">
-          <option value="" selected="selected" id="pleaseSelect">Please select calendar</option>
+          <option value="" selected="selected">Please select calendar</option>
           <option ng-repeat="calendar in calendars" value="{{calendar.id}}">{{calendar.name}}</option>
       </select>
       <select id="rangeList" title="Range list" class="form-control" ng-model="range" ng-change="update()">
