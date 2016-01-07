@@ -8,6 +8,8 @@ angular.module('ewsCalendarHourApp')
     $scope.group = false;
     $scope.datesRange = {startDate: null, endDate: null};
 
+
+
     $scope.update = function() {
       Calendar.calendar = $scope.calendar;
       Calendar.range = $scope.range;

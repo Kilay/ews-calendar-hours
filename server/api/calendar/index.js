@@ -5,7 +5,7 @@ var controller = require('./calendar.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.post('/initialize', controller.initialize);
 router.get('/list', controller.calendars);
 router.post('/events', controller.events);
 

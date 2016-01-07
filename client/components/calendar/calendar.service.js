@@ -3,6 +3,7 @@
 angular.module('ewsCalendarHourApp')
   .factory('Calendar', function ($http) {
     var data = {
+      credentials: {},
       calendar: '',
       calendars: [],
       events: [],
@@ -14,14 +15,26 @@ angular.module('ewsCalendarHourApp')
       readableDate: ''
     };
 
+    data.initialize = function() {
+      return $http.post('/api/calendar/initialize', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password})
+      .error(function(error) {
+        console.log(error);
+      });
+    };
+
     data.getCalendars = function() {
-      return $http.get('/api/calendar/list').success(function(calendars) {
+      return $http.get('/api/calendar/list')
+      .success(function(calendars) {
         angular.copy(calendars, data.calendars);
+      })
+      .error(function(error) {
+        console.log(error);
       });
     };
 
     data.getEvents = function() {
-      return $http.post('/api/calendar/events/', {'CalendarId': data.calendar, 'StartDate': data.start.format(), 'EndDate': data.end.format()}).success(function(events) {
+      return $http.post('/api/calendar/events/', {'CalendarId': data.calendar, 'StartDate': data.start.format(), 'EndDate': data.end.format()})
+      .success(function(events) {
         var basedDuration = moment.duration();
         var a = {};
         angular.forEach(events, function(event, key) {

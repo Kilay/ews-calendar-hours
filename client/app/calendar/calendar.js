@@ -4,7 +4,7 @@ angular.module('ewsCalendarHourApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('calendar', {
-        url: '/',
+        url: '/calendar',
         templateUrl: 'app/calendar/calendar.html',
         controller: 'CalendarCtrl',
         resolve: {

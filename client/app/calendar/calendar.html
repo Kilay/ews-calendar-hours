@@ -1,49 +1,47 @@
-<div id="container">
-  <h3>EWS Calendar Hours Calculator</h3>
-  <div id="app" style="display: block;">
-    <form role="form" method="post" class="form-horizontal" id="reg_form"> <!-- Reg form -->
-      <select id="calendarList" title="Calendar list" class="form-control" ng-model="calendar" ng-change="update()">
-          <option value="" selected="selected">Please select calendar</option>
-          <option ng-repeat="calendar in calendars" value="{{calendar.id}}">{{calendar.name}}</option>
-      </select>
-      <select id="rangeList" title="Range list" class="form-control" ng-model="range" ng-change="update()">
-        <option value="day">Day</option>
-        <option value="week">Week</option>
-        <option value="month">Month</option>
-        <option value="year">Year</option>
-        <option value="custom">Custom</option>
-      </select>
-      <div class="text-center">
-        <div id="controls" class="btn-group" ng-hide="range==='custom'">
-          <label class="btn btn-primary" ng-click="previous()" ng-disabled="controls">PREV</label>
-          <label class="btn btn-primary" ng-click="update()" ng-disabled="controls">RESET to this {{range}}</label>
-          <label class="btn btn-primary" ng-click="next()" ng-disabled="controls">NEXT</label>
-        </div>
-        <div id="rangepicker" class="form-group has-feedback" ng-hide="range!=='custom'">
-          <input date-range-picker ng-model="datesRange" options="{showDropdowns: true, linkedCalendars: false}" type="text" class="form-control" placeholder="Select a range" title="Custom range picker">
-          <span class="fa fa-calendar glyphicon glyphicon-calendar form-control-feedback"></span>
-        </div>
+<h3>EWS Calendar Hours Calculator</h3>
+<div id="app" style="display: block;">
+  <form role="form" method="post" class="form-horizontal" id="reg_form"> <!-- Reg form -->
+    <select id="calendarList" title="Calendar list" class="form-control" ng-model="calendar" ng-change="update()">
+        <option value="" selected="selected">Please select calendar</option>
+        <option ng-repeat="calendar in calendars" value="{{calendar.id}}">{{calendar.name}}</option>
+    </select>
+    <select id="rangeList" title="Range list" class="form-control" ng-model="range" ng-change="update()">
+      <option value="day">Day</option>
+      <option value="week">Week</option>
+      <option value="month">Month</option>
+      <option value="year">Year</option>
+      <option value="custom">Custom</option>
+    </select>
+    <div class="text-center">
+      <div id="controls" class="btn-group" ng-hide="range==='custom'">
+        <label class="btn btn-primary" ng-click="previous()" ng-disabled="controls">PREV</label>
+        <label class="btn btn-primary" ng-click="update()" ng-disabled="controls">RESET to this {{range}}</label>
+        <label class="btn btn-primary" ng-click="next()" ng-disabled="controls">NEXT</label>
       </div>
-      <div class="hours" block-ui="myBlock">{{cumulatedDuration}}h</div>
-      <div class="hoursrange">{{readableDate}}</div>
-      <uib-accordion>
-        <uib-accordion-group heading="show/hide details" id='details'>
-          <label>
-            <input type="checkbox" ng-model="group"> Group by name
-          </label>
-          <ul class='list-unstyled'>
-            <li ng-repeat="event in events" ng-hide="group">
+      <div id="rangepicker" class="form-group has-feedback" ng-hide="range!=='custom'">
+        <input date-range-picker ng-model="datesRange" options="{showDropdowns: true, linkedCalendars: false}" type="text" class="form-control" placeholder="Select a range" title="Custom range picker">
+        <span class="fa fa-calendar glyphicon glyphicon-calendar form-control-feedback"></span>
+      </div>
+    </div>
+    <div class="hours" block-ui="myBlock">{{cumulatedDuration}}h</div>
+    <div class="hoursrange">{{readableDate}}</div>
+    <uib-accordion>
+      <uib-accordion-group heading="show/hide details" id='details'>
+        <label>
+          <input type="checkbox" ng-model="group"> Group by name
+        </label>
+        <ul class='list-unstyled'>
+          <li ng-repeat="event in events" ng-hide="group">
+            <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
+          </li>
+          <span ng-repeat="(key, value) in groupedEvents | orderBy: 'durationAsHours'" ng-show="group">
+            <span class="label label-primary">{{key}}</span> {{value.durationAsHours}}h
+            <li ng-repeat="event in value.events" ng-show="group" class="indent">
               <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
             </li>
-            <span ng-repeat="(key, value) in groupedEvents | orderBy: 'durationAsHours'" ng-show="group">
-              <span class="label label-primary">{{key}}</span> {{value.durationAsHours}}h
-              <li ng-repeat="event in value.events" ng-show="group" class="indent">
-                <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
-              </li>
-            </span>
-          </ul>
-        </uib-accordion-group>
-      </uib-accordion>
-    </form>
-  </div>
+          </span>
+        </ul>
+      </uib-accordion-group>
+    </uib-accordion>
+  </form>
 </div>
