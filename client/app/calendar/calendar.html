@@ -1,6 +1,11 @@
 <h3>EWS Calendar Hours Calculator</h3>
 <div id="app" style="display: block;">
-  <form role="form" method="post" class="form-horizontal" id="reg_form"> <!-- Reg form -->
+  <form role="form" method="post" class="form-horizontal" id="reg_form">
+    <div class="alert alert-danger" role="alert" ng-show="error">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {{error}}
+    </div>
     <select id="calendarList" title="Calendar list" class="form-control" ng-model="calendar" ng-change="update()">
         <option value="" selected="selected">Please select calendar</option>
         <option ng-repeat="calendar in calendars" value="{{calendar.id}}">{{calendar.name}}</option>

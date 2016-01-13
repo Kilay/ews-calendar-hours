@@ -12,13 +12,19 @@ angular.module('ewsCalendarHourApp')
       range: 'week',
       start: '',
       end: '',
-      readableDate: ''
+      readableDate: '',
+      error: ''
     };
 
-    data.initialize = function() {
+    data.login = function() {
       return $http.post('/api/calendar/login', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password})
       .error(function(error) {
-        console.log(error);
+        if(error == 'Unauthorized')
+          data.error = 'Incorrect username or password';
+        else if(error == 'Not found')
+          data.error = 'Incorrect server';
+        else
+          data.error = angular.copy(error);
       });
     };
 
@@ -28,7 +34,12 @@ angular.module('ewsCalendarHourApp')
         angular.copy(calendars, data.calendars);
       })
       .error(function(error) {
-        console.log(error);
+        if(error == 'Unauthorized')
+          data.error = 'Incorrect username or password.';
+        else if(error == 'Not found')
+          data.error = 'Incorrect server.';
+        else
+          data.error = angular.copy(error);
       });
     };
 
@@ -52,6 +63,14 @@ angular.module('ewsCalendarHourApp')
         angular.copy(events, data.events);
         angular.copy(a, data.groupedEvents);
         data.cumulatedDuration = angular.copy(Math.round(basedDuration.asHours() * 100) / 100);
+      })
+      .error(function(error) {
+        if(error == 'Unauthorized')
+          data.error = 'Incorrect username or password.';
+        else if(error == 'Not found')
+          data.error = 'Incorrect server.';
+        else
+          data.error = angular.copy(error);
       });
     };
 
