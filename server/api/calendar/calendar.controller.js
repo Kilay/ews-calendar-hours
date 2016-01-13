@@ -4,41 +4,40 @@ var exchanger = require('exchanger');
 var config = require('../../config/local.env');
 
 // Get list of calendars
-exports.initialize = function(req, res) {
-  exchanger.initialize({url: req.body.Server, username: req.body.Username, password: req.body.Password}, function(err) {
-    res.json(err);
+exports.login = function(req, res) {
+  exchanger.initialize({url: req.body.Server, username: req.body.Username, password: req.body.Password})
+  .then(function(client) {
+    exchanger.checkLogin(req.body.Username)
+    .then(function(contacts) {
+      res.end();
+    })
+    .fail(function(error) {
+      if(error.code == 401) res.status(401).send('Unauthorized');
+      if(error.code == 404) res.status(404).send('Not found');
+    });
   });
 };
 
 // Get list of calendars
 exports.calendars = function(req, res) {
-  exchanger.getCalendars(function(err, calendars) {
-    console.log('eeeee');
-    if(err) {
-      console.log(err);
-      if(err.code === 'ENOTFOUND')
-        res.status(404).send('Incorrect server.');
-      else if(err.response.statusCode === 401)
-        res.status(401).send({ error: 'Incorrect username or password.' });
-    }
-    else {
-      res.json(calendars);
-    }
+  exchanger.getCalendars()
+  .then(function(calendars) {
+    res.json(calendars);
+  })
+  .fail(function(error) {
+    if(error.code == 401) res.status(401).send('Unauthorized');
+    if(error.code == 404) res.status(404).send('Not found');
   });
 };
 
 // Get list of events
 exports.events = function(req, res) {
-  exchanger.getCalendarItems({id: req.body.CalendarId, changeKey: req.body.CalendarChangeKey}, req.body.StartDate, req.body.EndDate, function(err, events) {
-    if(err) {
-      console.log(err);
-      if(err.code === 'ENOTFOUND')
-        res.status(404).send({ error: 'Incorrect server.' });
-      else if(err.response.statusCode === 401)
-        res.status(401).send({ error: 'Incorrect username or password.' });
-    }
-    else {
-      res.json(events);
-    }
+  exchanger.getCalendarItems({id: req.body.CalendarId, changeKey: req.body.CalendarChangeKey}, req.body.StartDate, req.body.EndDate)
+  .then(function(calendars) {
+    res.json(calendars);
+  })
+  .fail(function(error) {
+    if(error.code == 401) res.status(401).send('Unauthorized');
+    if(error.code == 404) res.status(404).send('Not found');
   });
 };

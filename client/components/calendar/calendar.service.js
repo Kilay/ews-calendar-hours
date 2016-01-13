@@ -16,7 +16,7 @@ angular.module('ewsCalendarHourApp')
     };
 
     data.initialize = function() {
-      return $http.post('/api/calendar/initialize', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password})
+      return $http.post('/api/calendar/login', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password})
       .error(function(error) {
         console.log(error);
       });
