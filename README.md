@@ -10,17 +10,12 @@ To build the app use [grunt](http://gruntjs.com/):
 npm install -g grunt-cli bower
 npm install
 bower install
-```
 
-Create server/config/local.env.js with your exchange information
-
-```
 # test
 grunt serve
 
-# build
-grunt
 ```
+
 Open : http://localhost:9000
 
 ## License 
