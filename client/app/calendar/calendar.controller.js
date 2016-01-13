@@ -15,7 +15,7 @@ angular.module('ewsCalendarHourApp')
       Calendar.range = $scope.range;
 
       Calendar.updateRange();
-      if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
+      if(Calendar.calendar !== undefined && Calendar.calendar !== '') {
         Calendar.getEvents().success(function() {
           $scope.cumulatedDuration = Calendar.cumulatedDuration;
           $scope.readableDate = Calendar.readableDate;
@@ -36,7 +36,7 @@ angular.module('ewsCalendarHourApp')
       Calendar.range = $scope.range;
 
       Calendar.updateRange(-1);
-      if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
+      if(Calendar.calendar !== undefined && Calendar.calendar !== '') {
         Calendar.getEvents().success(function() {
           $scope.cumulatedDuration = Calendar.cumulatedDuration;
           $scope.readableDate = Calendar.readableDate;
@@ -57,7 +57,7 @@ angular.module('ewsCalendarHourApp')
       Calendar.range = $scope.range;
 
       Calendar.updateRange(1);
-      if(Calendar.calendar !== undefined && Calendar.calendar !== "") {
+      if(Calendar.calendar !== undefined && Calendar.calendar !== '') {
         Calendar.getEvents().success(function() {
           $scope.cumulatedDuration = Calendar.cumulatedDuration;
           $scope.readableDate = Calendar.readableDate;

@@ -14,7 +14,7 @@ angular.module('ewsCalendarHourApp')
         });
       }
       else {
-        $scope.error = 'Enter credentials information'
+        $scope.error = 'Enter credentials information';
       }
     };
   });

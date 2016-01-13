@@ -12,9 +12,9 @@ exports.login = function(req, res) {
       res.end();
     })
     .fail(function(error) {
-      if(error.code == 401) res.status(401).send('Unauthorized');
-      if(error.code == 404) res.status(404).send('Not found');
-      if(error.code == 'NOCLIENT') res.status(500).send('No connection to EWS');
+      if(error.code === 401) res.status(401).send('Unauthorized');
+      if(error.code === 404) res.status(404).send('Not found');
+      if(error.code === 'NOCLIENT') res.status(500).send('No connection to EWS');
     });
   });
 };
@@ -26,9 +26,9 @@ exports.calendars = function(req, res) {
     res.json(calendars);
   })
   .fail(function(error) {
-    if(error.code == 401) res.status(401).send('Unauthorized');
-    if(error.code == 404) res.status(404).send('Not found');
-    if(error.code == 'NOCLIENT') res.status(500).send('No connection to EWS');
+    if(error.code === 401) res.status(401).send('Unauthorized');
+    if(error.code === 404) res.status(404).send('Not found');
+    if(error.code === 'NOCLIENT') res.status(500).send('No connection to EWS');
   });
 };
 
@@ -39,8 +39,8 @@ exports.events = function(req, res) {
     res.json(calendars);
   })
   .fail(function(error) {
-    if(error.code == 401) res.status(401).send('Unauthorized');
-    if(error.code == 404) res.status(404).send('Not found');
-    if(error.code == 'NOCLIENT') res.status(500).send('No connection to EWS');
+    if(error.code === 401) res.status(401).send('Unauthorized');
+    if(error.code === 404) res.status(404).send('Not found');
+    if(error.code === 'NOCLIENT') res.status(500).send('No connection to EWS');
   });
 };

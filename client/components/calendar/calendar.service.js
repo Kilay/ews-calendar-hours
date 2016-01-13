@@ -19,12 +19,15 @@ angular.module('ewsCalendarHourApp')
     data.login = function() {
       return $http.post('/api/calendar/login', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password})
       .error(function(error) {
-        if(error == 'Unauthorized')
+        if (error === 'Unauthorized') {
           data.error = 'Incorrect username or password';
-        else if(error == 'Not found')
+        }
+        else if (error === 'Not found') {
           data.error = 'Incorrect server';
-        else
+        }
+        else {
           data.error = angular.copy(error);
+        }
       });
     };
 
@@ -34,12 +37,15 @@ angular.module('ewsCalendarHourApp')
         angular.copy(calendars, data.calendars);
       })
       .error(function(error) {
-        if(error == 'Unauthorized')
-          data.error = 'Incorrect username or password.';
-        else if(error == 'Not found')
-          data.error = 'Incorrect server.';
-        else
+        if (error === 'Unauthorized') {
+          data.error = 'Incorrect username or password';
+        }
+        else if (error === 'Not found') {
+          data.error = 'Incorrect server';
+        }
+        else {
           data.error = angular.copy(error);
+        }
       });
     };
 
@@ -48,7 +54,7 @@ angular.module('ewsCalendarHourApp')
       .success(function(events) {
         var basedDuration = moment.duration();
         var a = {};
-        angular.forEach(events, function(event, key) {
+        angular.forEach(events, function(event, key) { // jshint ignore:line
           event.durationAsHours = Math.round(moment.duration(event.duration).asHours() * 100) / 100;
           if(event.subject in a) {
             a[event.subject].duration = a[event.subject].duration.add(moment.duration(event.duration));
@@ -65,48 +71,53 @@ angular.module('ewsCalendarHourApp')
         data.cumulatedDuration = angular.copy(Math.round(basedDuration.asHours() * 100) / 100);
       })
       .error(function(error) {
-        if(error == 'Unauthorized')
-          data.error = 'Incorrect username or password.';
-        else if(error == 'Not found')
-          data.error = 'Incorrect server.';
-        else
+        if (error === 'Unauthorized') {
+          data.error = 'Incorrect username or password';
+        }
+        else if (error === 'Not found') {
+          data.error = 'Incorrect server';
+        }
+        else {
           data.error = angular.copy(error);
+        }
       });
     };
 
     data.updateRange = function(offset) {
       var currentDatePointer;
       if(offset === undefined) {
-        if(data.range === "week")
-          currentDatePointer = moment().startOf("isoWeek");
-        else
+        if (data.range === 'week') {
+          currentDatePointer = moment().startOf('isoWeek');
+        }
+        else {
           currentDatePointer = moment().startOf(data.range);
+        }
       }
       else {
         currentDatePointer = data.start.add(offset, data.range);
       }
 
-      if(data.range === "day") {
+      if(data.range === 'day') {
         data.start = currentDatePointer.clone();
-        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, "seconds");
+        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, 'seconds');
         data.readableDate = data.start.format('dddd, LL');
       }
-      else if(data.range === "week") {
+      else if(data.range === 'week') {
         data.start = currentDatePointer.clone();
-        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, "seconds");
-        data.readableDate = data.start.format("L") + ' - ' + data.end.format("L");
+        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, 'seconds');
+        data.readableDate = data.start.format('L') + ' - ' + data.end.format('L');
       }
-      else if(data.range === "month") {
+      else if(data.range === 'month') {
         data.start = currentDatePointer.clone();
-        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, "seconds");
-        data.readableDate = data.start.format("MMMM YYYY");
+        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, 'seconds');
+        data.readableDate = data.start.format('MMMM YYYY');
       }
-      else if(data.range === "year") {
+      else if(data.range === 'year') {
         data.start = currentDatePointer.clone();
-        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, "seconds");
-        data.readableDate = data.end.format("YYYY");
+        data.end = currentDatePointer.clone().add(1, data.range).subtract(1, 'seconds');
+        data.readableDate = data.end.format('YYYY');
       }
-      else if(data.range === "custom") {
+      else if(data.range === 'custom') {
         data.readableDate = '';
       }
     };
