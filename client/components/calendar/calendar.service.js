@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ewsCalendarHourApp')
-  .factory('Calendar', function ($http) {
+  .factory('Calendar', function ($http, $state) {
     var data = {
       credentials: {},
       calendar: '',
@@ -25,6 +25,10 @@ angular.module('ewsCalendarHourApp')
         else if (error === 'Not found') {
           data.error = 'Incorrect server';
         }
+        else if (error === 'No connection to EWS') {
+          data.error = 'Please connect to EWS before';
+          $state.go('login');
+        }
         else {
           data.error = angular.copy(error);
         }
@@ -42,6 +46,10 @@ angular.module('ewsCalendarHourApp')
         }
         else if (error === 'Not found') {
           data.error = 'Incorrect server';
+        }
+        else if (error === 'No connection to EWS') {
+          data.error = 'Please connect to EWS before';
+          $state.go('login');
         }
         else {
           data.error = angular.copy(error);
@@ -76,6 +84,10 @@ angular.module('ewsCalendarHourApp')
         }
         else if (error === 'Not found') {
           data.error = 'Incorrect server';
+        }
+        else if (error === 'No connection to EWS') {
+          data.error = 'Please connect to EWS before';
+          $state.go('login');
         }
         else {
           data.error = angular.copy(error);
