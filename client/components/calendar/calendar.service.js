@@ -97,6 +97,7 @@ angular.module('ewsCalendarHourApp')
 
     data.updateRange = function(offset) {
       var currentDatePointer;
+
       if(offset === undefined) {
         if (data.range === 'week') {
           currentDatePointer = moment().startOf('isoWeek');
@@ -104,6 +105,9 @@ angular.module('ewsCalendarHourApp')
         else {
           currentDatePointer = moment().startOf(data.range);
         }
+      }
+      else if(moment.isMoment(offset)) {
+        currentDatePointer = offset;
       }
       else {
         currentDatePointer = data.start.add(offset, data.range);

@@ -18,13 +18,17 @@
       <option value="custom">Custom</option>
     </select>
     <div class="text-center">
+      <div id="singlepicker" class="form-group has-feedback" ng-show="range==='day'">
+        <input date-range-picker ng-model="singleDate" options="{singleDatePicker: true, showDropdowns: true}" type="text" class="form-control" placeholder="Select a day" title="Custom day picker" />
+        <span class="fa fa-calendar glyphicon glyphicon-calendar form-control-feedback"></span>
+      </div>
       <div id="controls" class="btn-group" ng-hide="range==='custom'">
-        <label class="btn btn-primary" ng-click="previous()" ng-disabled="controls">PREV</label>
+        <label class="btn btn-primary" ng-click="update(-1)" ng-disabled="controls">PREV</label>
         <label class="btn btn-primary" ng-click="update()" ng-disabled="controls">RESET to this {{range}}</label>
-        <label class="btn btn-primary" ng-click="next()" ng-disabled="controls">NEXT</label>
+        <label class="btn btn-primary" ng-click="update(1)" ng-disabled="controls">NEXT</label>
       </div>
       <div id="rangepicker" class="form-group has-feedback" ng-hide="range!=='custom'">
-        <input date-range-picker ng-model="datesRange" options="{showDropdowns: true, linkedCalendars: false}" type="text" class="form-control" placeholder="Select a range" title="Custom range picker">
+        <input date-range-picker ng-model="datesRange" options="{showDropdowns: true, linkedCalendars: false}" type="text" class="form-control" placeholder="Select a range" title="Custom range picker" />
         <span class="fa fa-calendar glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
     </div>

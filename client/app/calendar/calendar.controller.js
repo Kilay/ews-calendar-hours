@@ -7,58 +7,22 @@ angular.module('ewsCalendarHourApp')
     $scope.controls = true;
     $scope.group = false;
     $scope.datesRange = {startDate: null, endDate: null};
+    $scope.singleDate = moment();
 
-    $scope.update = function() {
+    $scope.update = function(offset) {
       Calendar.calendar = $scope.calendar;
       Calendar.range = $scope.range;
 
-      Calendar.updateRange();
+      Calendar.updateRange(offset);
       if(Calendar.calendar !== undefined && Calendar.calendar !== '') {
         Calendar.getEvents().success(function() {
           $scope.cumulatedDuration = Calendar.cumulatedDuration;
           $scope.readableDate = Calendar.readableDate;
-          $scope.controls = false;
-        });
-      }
-      else {
-        Calendar.reset();
-        $scope.cumulatedDuration = Calendar.cumulatedDuration;
-        $scope.events = Calendar.events;
-        $scope.groupedEvents = Calendar.groupedEvents;
-        $scope.controls = true;
-      }
-    };
-
-    $scope.previous = function() {
-      Calendar.calendar = $scope.calendar;
-      Calendar.range = $scope.range;
-
-      Calendar.updateRange(-1);
-      if(Calendar.calendar !== undefined && Calendar.calendar !== '') {
-        Calendar.getEvents().success(function() {
-          $scope.cumulatedDuration = Calendar.cumulatedDuration;
-          $scope.readableDate = Calendar.readableDate;
-          $scope.controls = false;
-        });
-      }
-      else {
-        Calendar.reset();
-        $scope.cumulatedDuration = Calendar.cumulatedDuration;
-        $scope.events = Calendar.events;
-        $scope.groupedEvents = Calendar.groupedEvents;
-        $scope.controls = true;
-      }
-    };
-
-    $scope.next = function() {
-      Calendar.calendar = $scope.calendar;
-      Calendar.range = $scope.range;
-
-      Calendar.updateRange(1);
-      if(Calendar.calendar !== undefined && Calendar.calendar !== '') {
-        Calendar.getEvents().success(function() {
-          $scope.cumulatedDuration = Calendar.cumulatedDuration;
-          $scope.readableDate = Calendar.readableDate;
+          $scope.singleDate = Calendar.start;
+          $scope.datesRange = {
+            startDate: Calendar.start,
+            endDate: Calendar.end
+          };
           $scope.controls = false;
         });
       }
@@ -72,8 +36,17 @@ angular.module('ewsCalendarHourApp')
     };
 
     $scope.$watch('datesRange', function(newDate) {
-      Calendar.start = newDate.startDate;
-      Calendar.end = newDate.endDate;
-      $scope.update();
+      if (newDate.startDate !== Calendar.start || newDate.endDate !== Calendar.end) {
+        Calendar.start = newDate.startDate;
+        Calendar.end = newDate.endDate;
+        $scope.update();
+      }
+    }, false);
+
+    $scope.$watch('singleDate', function(newDate) {
+      if (newDate !== Calendar.start) {
+        Calendar.start = newDate;
+        $scope.update(newDate);
+      }
     }, false);
   });
