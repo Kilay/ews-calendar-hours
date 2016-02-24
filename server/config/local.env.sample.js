@@ -12,9 +12,6 @@ config.DOMAIN = '';
 config.SESSION_SECRET = "";
 // Control debug level for modules using visionmedia/debug
 config.DEBUG = '';
-
-config.ews.server = '';
-config.ews.user = '';
-config.ews.password = '';
+config.GA = 'UA-XXXXX-X';
 
 module.exports = config;
