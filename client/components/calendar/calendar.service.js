@@ -63,6 +63,7 @@ angular.module('ewsCalendarHourApp')
         var basedDuration = moment.duration();
         var a = {};
         angular.forEach(events, function(event, key) { // jshint ignore:line
+          event.tooltip = moment(event.start).format("LL") + ' from ' + moment(event.start).format("LT") + ' to ' + moment(event.end).format("LT") + ' by ' + event.organizer;
           event.durationAsHours = Math.round(moment.duration(event.duration).asHours() * 100) / 100;
           if(event.subject in a) {
             a[event.subject].duration = a[event.subject].duration.add(moment.duration(event.duration));

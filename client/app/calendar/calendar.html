@@ -41,12 +41,12 @@
         </label>
         <ul class='list-unstyled'>
           <li ng-repeat="event in events" ng-hide="group">
-            <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
+            <span class="label label-default" uib-tooltip="{{event.tooltip}}">{{event.subject}}</span> {{event.durationAsHours}}h
           </li>
           <span ng-repeat="(key, value) in groupedEvents" ng-show="group">
             <span class="label label-primary">{{key}}</span> {{value.durationAsHours}}h
             <li ng-repeat="event in value.events" ng-show="group" class="indent">
-              <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
+              <span class="label label-default" uib-tooltip="{{event.tooltip}}">{{event.subject}}</span> {{event.durationAsHours}}h
             </li>
           </span>
         </ul>
