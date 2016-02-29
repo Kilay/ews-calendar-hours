@@ -43,7 +43,7 @@
           <li ng-repeat="event in events" ng-hide="group">
             <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
           </li>
-          <span ng-repeat="(key, value) in groupedEvents | orderBy: 'durationAsHours'" ng-show="group">
+          <span ng-repeat="(key, value) in groupedEvents" ng-show="group">
             <span class="label label-primary">{{key}}</span> {{value.durationAsHours}}h
             <li ng-repeat="event in value.events" ng-show="group" class="indent">
               <span class="label label-default">{{event.subject}}</span> {{event.durationAsHours}}h
