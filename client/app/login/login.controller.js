@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('ewsCalendarHourApp')
-  .controller('LoginCtrl', function ($scope, $state, Calendar) {
-    $scope.error = Calendar.error;
+  .controller('LoginCtrl', function ($scope, $state, Authentication) {
+    $scope.error = Authentication.error;
     $scope.update = function() {
-      Calendar.credentials = angular.copy($scope.credentials);
-      if (Calendar.credentials !== undefined && (Calendar.credentials.server !== undefined && Calendar.credentials.username !== undefined && Calendar.credentials.password !== undefined)) {
-        Calendar.login().success(function () {
+      Authentication.credentials = angular.copy($scope.credentials);
+      if (Authentication.credentials !== undefined && (Authentication.credentials.server !== undefined && Authentication.credentials.username !== undefined && Authentication.credentials.password !== undefined)) {
+        Authentication.login().success(function () {
           $state.go('calendar');
         })
         .error(function () {
-          $scope.error = Calendar.error;
+          $scope.error = Authentication.error;
         });
       }
       else {

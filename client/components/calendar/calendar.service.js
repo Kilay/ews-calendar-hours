@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ewsCalendarHourApp')
-  .factory('Calendar', function ($http, $state) {
+  .factory('Calendar', function ($http, $state, Authentication) {
     var data = {
       credentials: {},
       calendar: '',
@@ -16,27 +16,12 @@ angular.module('ewsCalendarHourApp')
       error: ''
     };
 
-    data.login = function() {
-      return $http.post('/api/calendar/login', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password})
-      .error(function(error) {
-        if (error === 'Unauthorized') {
-          data.error = 'Incorrect username or password';
-        }
-        else if (error === 'Not found') {
-          data.error = 'Incorrect server';
-        }
-        else if (error === 'No connection to EWS') {
-          data.error = 'Please connect to EWS before';
-          $state.go('login');
-        }
-        else {
-          data.error = angular.copy(error);
-        }
-      });
-    };
-
     data.getCalendars = function() {
-      return $http.get('/api/calendar/list')
+      return $http.get('/api/calendar/list', {
+        headers: {
+          Authorization: 'Bearer '+ Authentication.getToken()
+        }
+      })
       .success(function(calendars) {
         angular.copy(calendars, data.calendars);
       })
@@ -49,6 +34,7 @@ angular.module('ewsCalendarHourApp')
         }
         else if (error === 'No connection to EWS') {
           data.error = 'Please connect to EWS before';
+          Authentication.logout();
           $state.go('login');
         }
         else {
@@ -58,7 +44,15 @@ angular.module('ewsCalendarHourApp')
     };
 
     data.getEvents = function() {
-      return $http.post('/api/calendar/events/', {'CalendarId': data.calendar, 'StartDate': data.start.format(), 'EndDate': data.end.format()})
+      return $http.post('/api/calendar/events/', {
+        'CalendarId': data.calendar,
+        'StartDate': data.start.format(),
+        'EndDate': data.end.format()
+        }, {
+        headers: {
+          Authorization: 'Bearer '+ Authentication.getToken()
+        }
+      })
       .success(function(events) {
         var basedDuration = moment.duration();
         var a = {};
@@ -88,6 +82,7 @@ angular.module('ewsCalendarHourApp')
         }
         else if (error === 'No connection to EWS') {
           data.error = 'Please connect to EWS before';
+          Authentication.logout();
           $state.go('login');
         }
         else {
