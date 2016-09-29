@@ -5,7 +5,7 @@ angular.module('ewsCalendarHourApp')
     $scope.error = Calendar.error;
     $scope.update = function() {
       Calendar.credentials = angular.copy($scope.credentials);
-      if (Calendar.credentials !== undefined && (Calendar.credentials.server !== undefined && Calendar.credentials.username !== undefined && Calendar.credentials.password !== undefined)) {
+      if (Calendar.credentials !== undefined && (Calendar.credentials.server !== undefined && Calendar.credentials.username !== undefined && Calendar.credentials.password !== undefined && Calendar.credentials.security !== undefined)) {
         Calendar.login().success(function () {
           $state.go('calendar');
         })

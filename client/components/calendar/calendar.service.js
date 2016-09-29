@@ -17,7 +17,7 @@ angular.module('ewsCalendarHourApp')
     };
 
     data.login = function() {
-      return $http.post('/api/calendar/login', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password})
+      return $http.post('/api/calendar/login', {'Server': data.credentials.server, 'Username': data.credentials.username, 'Password': data.credentials.password, 'Security': data.credentials.security})
       .error(function(error) {
         if (error === 'Unauthorized') {
           data.error = 'Incorrect username or password';

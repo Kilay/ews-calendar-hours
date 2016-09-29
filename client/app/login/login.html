@@ -6,11 +6,11 @@
   <input type="text" id="inputUsername" ng-model="credentials.username" class="form-control" placeholder="Username" required />
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" ng-model="credentials.password" class="form-control" placeholder="Password" required />
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
+  <select id="securityType" title="Security Type" class="form-control" ng-model="credentials.security">
+    <option value="">Choose Security Type</option>
+    <option value="basic">Basic</option>
+    <option value="ntlm">NTLM</option>
+  </select>
   <div class="alert alert-danger" role="alert" ng-show="error">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     <span class="sr-only">Error:</span>
